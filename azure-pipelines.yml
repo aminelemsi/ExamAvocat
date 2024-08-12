@@ -18,7 +18,7 @@ steps:
 - task: Docker@2
   inputs:
     command: 'push'
-    containerRegistry: 'your-container-registry-service-connection'
+    containerRegistry: 'docker-hub-connexion'
     repository: 'app-examavocat'
     tags: 'latest'
   displayName: 'Push Docker image to container registry'
