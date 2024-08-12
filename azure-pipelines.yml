@@ -1,0 +1,24 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    docker build -t app-examavocat .
+  displayName: 'Build Docker image'
+
+- task: Docker@2
+  inputs:
+    command: 'push'
+    containerRegistry: 'your-container-registry-service-connection'
+    repository: 'app-examavocat'
+    tags: 'latest'
+  displayName: 'Push Docker image to container registry'
