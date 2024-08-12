@@ -19,6 +19,6 @@ steps:
   inputs:
     command: 'push'
     containerRegistry: 'docker-hub-connexion'
-    repository: 'app-examavocat'
+    repository: 'aminelemsi'
     tags: 'latest'
   displayName: 'Push Docker image to container registry'
