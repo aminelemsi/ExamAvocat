@@ -16,7 +16,10 @@ steps:
     docker build -t aminelemsi/app-examavocat:latest .
   displayName: 'Build Docker image'
 - script: |
-    docker run --rm -v $(System.DefaultWorkingDirectory):/workspace aquasec/trivy:0.36.1 --format json --output /workspace/trivy-report.json app-examavocat
+    docker run --rm \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v $(System.DefaultWorkingDirectory):/root/.cache/ \
+      aquasec/trivy:latest image --format json --output /root/.cache/$(trivyReport) app-examavocat
   displayName: 'Run Trivy scan'
 
 - task: Docker@2
