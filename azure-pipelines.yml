@@ -15,6 +15,9 @@ steps:
     # Construire l'image Docker avec un tag
     docker build -t aminelemsi/app-examavocat:latest .
   displayName: 'Build Docker image'
+- script: |
+    docker run --rm -v $(System.DefaultWorkingDirectory):/workspace aquasec/trivy:0.36.1 --format json --output /workspace/trivy-report.json app-examavocat
+  displayName: 'Run Trivy scan'
 
 - task: Docker@2
   inputs:
@@ -23,3 +26,8 @@ steps:
     repository: 'aminelemsi/app-examavocat'
     tags: 'latest'
   displayName: 'Push Docker image to container registry'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/trivy-report.json'
+    artifactName: 'trivy-reports'
+  displayName: 'Publish Trivy scan results'
