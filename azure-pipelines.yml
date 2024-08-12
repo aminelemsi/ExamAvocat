@@ -12,7 +12,8 @@ steps:
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - script: |
-    docker build -t app-examavocat .
+    # Construire l'image Docker avec un tag
+    docker build -t aminelemsi/app-examavocat:latest .
   displayName: 'Build Docker image'
 
 - task: Docker@2
