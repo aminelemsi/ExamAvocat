@@ -19,7 +19,7 @@ steps:
     docker run --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
-      aquasec/trivy:latest image --format json --output /root/.cache/trivy-report.json aminelemsi/app-examavocat:latest
+      aquasec/trivy:latest image --format sarif --output /root/.cache/trivy-report.json aminelemsi/app-examavocat:latest
   displayName: 'Run Trivy scan'
 
 - task: Docker@2
