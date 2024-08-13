@@ -31,6 +31,6 @@ steps:
   displayName: 'Push Docker image to container registry'
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/trivy-report.json'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/trivy-report.sarif'
     artifactName: 'trivy-reports'
   displayName: 'Publish Trivy scan results'
