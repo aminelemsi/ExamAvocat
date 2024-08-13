@@ -15,12 +15,11 @@ steps:
     # Construire l'image Docker avec un tag
     docker build -t aminelemsi/app-examavocat:latest .
   displayName: 'Build Docker image'
-- script: |
-    docker run --rm \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v $(System.DefaultWorkingDirectory):/root/.cache/ \
-      aquasec/trivy:latest image --format sarif --output /root/.cache/trivy-report.sarif aminelemsi/app-examavocat:latest
-  displayName: 'Run Trivy scan'
+
+- task: trivy@1
+  inputs:
+    image: 'aminelemsi/app-examavocat:latest'
+  displayName: 'Run Trivy scan on Docker image'
 
 - task: Docker@2
   inputs:
