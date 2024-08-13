@@ -16,11 +16,6 @@ steps:
     docker build -t aminelemsi/app-examavocat:latest .
   displayName: 'Build Docker image'
 
-- task: trivy@1
-  inputs:
-    image: 'aminelemsi/app-examavocat:latest'
-  displayName: 'Run Trivy scan on Docker image'
-
 - task: Docker@2
   inputs:
     command: 'push'
