@@ -28,8 +28,8 @@ steps:
     repository: 'aminelemsi/app-examavocat'
     tags: 'latest'
   displayName: 'Push Docker image to container registry'
-- task: PublishBuildArtifacts@1
+
+- task: trivy@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/trivy-report.sarif'
-    artifactName: 'trivy-reports'
-  displayName: 'Publish Trivy scan results'
+    image: 'aminelemsi/app-examavocat:latest'
+  displayName: 'Run Trivy scan on Docker image'
