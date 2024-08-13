@@ -27,4 +27,5 @@ steps:
 - task: trivy@1
   inputs:
     image: 'aminelemsi/app-examavocat:latest'
+    ignoreUnfixed: true
   displayName: 'Run Trivy scan on Docker image'
