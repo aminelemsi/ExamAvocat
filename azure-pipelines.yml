@@ -29,3 +29,12 @@ steps:
     version: 'latest'
     image: 'aminelemsi/app-examavocat:latest'
   displayName: 'Run Trivy scan on Docker image'
+
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'Local-K8s-Cluster'
+    namespace: 'default'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: '$(System.DefaultWorkingDirectory)/path/to/k8s/deployment.yaml'
