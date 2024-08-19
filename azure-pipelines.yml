@@ -1,0 +1,34 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    # Construire l'image Docker avec un tag
+    docker build -t aminelemsi/app-examavocat:latest .
+  displayName: 'Build Docker image'
+
+- task: Docker@2
+  inputs:
+    command: 'push'
+    containerRegistry: 'docker-hub-connexion'
+    repository: 'aminelemsi/app-examavocat'
+    tags: 'latest'
+  displayName: 'Push Docker image to container registry'
+
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'Local-K8s-Cluster'
+    namespace: 'default'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: '$(System.DefaultWorkingDirectory)deployment.yaml'
