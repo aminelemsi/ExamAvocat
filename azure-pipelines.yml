@@ -23,12 +23,3 @@ steps:
     repository: 'aminelemsi/app-examavocat'
     tags: 'latest'
   displayName: 'Push Docker image to container registry'
-
-- task: Kubernetes@1
-  inputs:
-    connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'Local-K8s-Cluster'
-    namespace: 'default'
-    command: 'apply'
-    useConfigurationFile: true
-    configuration: '$(System.DefaultWorkingDirectory)/deployment.yaml'
