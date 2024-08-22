@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool: 
-  Local-K8s-Cluster
+  PoolAgentSelf
 
 steps:
 - task: Kubernetes@1
