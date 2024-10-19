@@ -18,6 +18,6 @@ steps:
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
       aquasec/trivy:latest image \
-      --output /home/trivy-report/trivy-results.sarif \
+      --output /root/.cache/trivy-report.sarif \
       aminelemsi/app-examavocat:latest
   displayName: 'Scan Docker image with Trivy'
