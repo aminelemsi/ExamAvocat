@@ -20,10 +20,3 @@ steps:
       --output trivy-results.sarif \
       aminelemsi/app-examavocat:latest
   displayName: 'Scan Docker image with Trivy'
-
-# Publier les résultats du scan Trivy en tant qu'artifact
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: 'trivy-results.sarif'
-    artifactName: 'TrivyScanResults'
-    publishLocation: 'pipeline'
