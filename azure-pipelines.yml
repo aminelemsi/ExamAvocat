@@ -28,8 +28,22 @@ steps:
   inputs:
     command: login
     containerRegistry: docker-hub-connexion
-- task: trivy@1
+
+# Commande Docker pour scanner l'image avec Trivy
+- script: |
+    docker run --rm \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v $(System.DefaultWorkingDirectory):/root/.cache/ \
+        aquasec/trivy:latest image 
+      --format sarif \
+      --output trivy-results.sarif \
+      aminelemsi/app-examavocat:latest
+
+  displayName: 'Scan Docker image with Trivy'
+
+# Publier les résultats du scan Trivy en tant qu'artifact
+- task: PublishPipelineArtifact@1
   inputs:
-    image: aminelemsi/app-examavocat:latest
-    # Needed to access private repo 
-    loginDockerConfig: true
+    targetPath: 'trivy-results.json'
+    artifactName: 'TrivyScanResults'
+    publishLocation: 'pipeline'
