@@ -23,6 +23,7 @@ steps:
     repository: 'aminelemsi/app-examavocat'
     tags: 'latest'
   displayName: 'Push Docker image to container registry'
+
 - task: Docker@2
   displayName: Login to ACR
   inputs:
@@ -35,7 +36,6 @@ steps:
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
         aquasec/trivy:latest image 
-      --format sarif \
       --output trivy-results.sarif \
       aminelemsi/app-examavocat:latest
 
