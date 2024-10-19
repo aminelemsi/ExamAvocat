@@ -24,6 +24,6 @@ steps:
 # Publier les résultats du scan Trivy en tant qu'artifact
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'trivy-results.json'
+    targetPath: 'trivy-results.sarif'
     artifactName: 'TrivyScanResults'
     publishLocation: 'pipeline'
