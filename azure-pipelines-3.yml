@@ -13,7 +13,6 @@ steps:
 
 # Commande Docker pour scanner l'image avec Trivy
 - script: |
-    mkdir -p /home/trivy-report
     docker run --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
@@ -21,3 +20,9 @@ steps:
       --output /root/.cache/trivy-report.sarif \
       aminelemsi/app-examavocat:latest
   displayName: 'Scan Docker image with Trivy'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(System.DefaultWorkingDirectory)/trivy-report.sarif'
+    artifactName: 'trivy-reports'
+  displayName: 'Publish Trivy scan results'
