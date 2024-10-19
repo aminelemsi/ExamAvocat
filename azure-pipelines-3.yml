@@ -13,10 +13,11 @@ steps:
 
 # Commande Docker pour scanner l'image avec Trivy
 - script: |
+    mkdir -p $(Build.ArtifactStagingDirectory)/trivy-report
     docker run --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
       aquasec/trivy:latest image \
-      --output $(Build.ArtifactStagingDirectory)/trivy-results.sarif \
+      --output $(Build.ArtifactStagingDirectory)/trivy-report/trivy-results.sarif \
       aminelemsi/app-examavocat:latest
   displayName: 'Scan Docker image with Trivy'
