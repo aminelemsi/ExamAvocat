@@ -35,10 +35,10 @@ steps:
     docker run --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
-        aquasec/trivy:latest image 
-      --output trivy-results.sarif \
+      aquasec/trivy:latest image \
+      --format sarif \
+      --output $(System.DefaultWorkingDirectory)/trivy-results.sarif \
       aminelemsi/app-examavocat:latest
-
   displayName: 'Scan Docker image with Trivy'
 
 # Publier les résultats du scan Trivy en tant qu'artifact
