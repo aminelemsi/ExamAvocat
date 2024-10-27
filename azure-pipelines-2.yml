@@ -1,9 +1,9 @@
 schedules:
-- cron: "0 1 * * *"
+- cron: "10 1 * * *"
   displayName: Déclenchement quotidien
   branches:
     include:
-      - amine  
+      - master  
 
 pool: 
   PoolAgentSelf
