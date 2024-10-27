@@ -1,3 +1,5 @@
+trigger: none
+
 schedules:
 - cron: "10 * * * *"
   displayName: Déclenchement quotidien
