@@ -39,6 +39,7 @@ steps:
 # Publier les résultats du scan Trivy en tant qu'artifact
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'trivy-results.json'
+    targetPath: '$(System.DefaultWorkingDirectory)/trivy-results.sarif'
     artifactName: 'TrivyScanResults'
     publishLocation: 'pipeline'
+  displayName: 'Publish Trivy scan results as pipeline artifact'
