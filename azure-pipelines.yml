@@ -25,7 +25,7 @@ steps:
     docker run --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
-      aquasec/trivy:db image \
+      aquasec/trivy:latest image \
       --format sarif \
       --output trivy-results.sarif \
       aminelemsi/app-examavocat:latest
@@ -34,7 +34,7 @@ steps:
 # Publier les résultats du scan Trivy en tant qu'artifact
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/trivy-results.sarif'
-    artifactName: 'TrivyScanResults'
+    targetPath: '$(Pipeline.Workspace)/trivy-results.sarif'
+    artifact: 'TrivyScanResults'
     publishLocation: 'pipeline'
   displayName: 'Publish Trivy scan results as pipeline artifact'
