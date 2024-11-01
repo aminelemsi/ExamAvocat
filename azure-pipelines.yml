@@ -25,7 +25,7 @@ steps:
     docker run --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
-      aquasec/trivy:latest image \
+      aquasec/trivy:db image \
       --format sarif \
       --output trivy-results.sarif \
       aminelemsi/app-examavocat:latest
