@@ -27,7 +27,7 @@ steps:
       -v $(System.DefaultWorkingDirectory):/root/.cache/ \
       aquasec/trivy:latest image \
       --format sarif \
-      --output trivy-results.sarif \
+      --output $(Pipeline.Workspace)/trivy-results.sarif \
       aminelemsi/app-examavocat:latest
   displayName: 'Scan Docker image with Trivy'
 
