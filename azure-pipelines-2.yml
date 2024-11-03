@@ -1,11 +1,11 @@
 trigger: none
 
-schedules:
-- cron: "10 * * * *"
-  displayName: Déclenchement quotidien
-  branches:
-    include:
-      - master  
+#schedules:
+#- cron: "10 * * * *"
+#  displayName: Déclenchement quotidien
+#  branches:
+#    include:
+#      - master  
 
 pool: 
   PoolAgentSelf
